@@ -12,10 +12,19 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    @staticmethod
+    def get_post(pk):
+        return Post.objects.filter(id=pk)
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     comment_text = models.TextField(blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
+
+
     def __str__(self):
         return 'Comment on {}'.format(self.post)
+
+

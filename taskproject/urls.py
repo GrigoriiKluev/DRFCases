@@ -14,11 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.db import router
 from django.urls import path
 from Posts.views import *
 
+#router.register(r'Posts', PostsViewSet, basename='postlist')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('api/v1/postlist/', PostsViewSet.as_view({'get': 'list'})),
+    path('api/v1/postlist/<int:pk>/', PostsViewSet.as_view({'get': 'retrieve'})),
     path('api/v1/postlist/', PostsViewSet.as_view({'get': 'list'})),
-    path('api/v1/postlist/<int:pk>/', PostsViewSet.as_view({'get': 'retrieve'}))
+    # path('api/v1/postlist/<int:pk>/', PostAPIUpdate.as_view()),
+    # path('api/v1/postlist/', PostAPIList.as_view()),
+    #path('api/v1/commentlist/', CommentViewSet.as_view({'get': 'list'}))
 ]
