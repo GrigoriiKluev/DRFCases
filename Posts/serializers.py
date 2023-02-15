@@ -35,6 +35,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance=instance)
+        print(data)
         comment = Comment.objects.filter(post=instance).last()
         data['comments'] = CommentSerializer(instance=comment).data
         return data
